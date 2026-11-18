@@ -1,26 +1,143 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Tokens: ver DESIGN.md ─────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f2f4f3;
+  --surface: #ffffff;
+  --surface-2: #e7ecea;
+  --line: #d3dad7;
+  --ink: #17212b;
+  --ink-soft: #55616d;
+  --navy: #1d3557;
+  --navy-hover: #26436b;
+  --on-navy: #ffffff;
+  --income: #2f7d5b;
+  --expense: #b4472e;
+  --warn: #8a6510;
+  --danger: #a8321f;
+  --income-tint: #eef6f1;
+  --expense-tint: #f6e4df;
+  --shadow-float: 0 12px 32px -8px rgb(23 33 43 / 0.22), 0 2px 6px rgb(23 33 43 / 0.08);
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #121a22;
+  --surface: #1a242f;
+  --surface-2: #222e3a;
+  --line: #2e3b48;
+  --ink: #e4eaef;
+  --ink-soft: #9aa7b3;
+  --navy: #8db2dd;
+  --navy-hover: #a5c3e6;
+  --on-navy: #0f1822;
+  --income: #62be92;
+  --expense: #e8896f;
+  --warn: #e0b455;
+  --danger: #f0927c;
+  --income-tint: #1d3a2f;
+  --expense-tint: #3d2620;
+  --shadow-float: 0 16px 40px -8px rgb(0 0 0 / 0.55), 0 2px 6px rgb(0 0 0 / 0.3);
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-navy: var(--navy);
+  --color-navy-hover: var(--navy-hover);
+  --color-on-navy: var(--on-navy);
+  --color-income: var(--income);
+  --color-expense: var(--expense);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+  --color-income-tint: var(--income-tint);
+  --color-expense-tint: var(--expense-tint);
+  --font-display: var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+  --radius-field: 6px;
+  --radius-panel: 10px;
+  --shadow-float: var(--shadow-float);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, a, label, summary, input, select {
+  touch-action: manipulation;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+}
+
+.num {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+
+/* Diálogo: hoja inferior en celular, ventana centrada en escritorio */
+dialog.sheet {
+  margin: auto auto 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 92dvh;
+  border-radius: 14px 14px 0 0;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-float);
+  padding: 0;
+  border: 0;
+  overscroll-behavior: contain;
+}
+dialog.sheet::backdrop {
+  background: rgb(10 16 22 / 0.5);
+}
+@media (min-width: 640px) {
+  dialog.sheet {
+    margin: auto;
+    max-width: 30rem;
+    border-radius: var(--radius-panel);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  dialog.sheet[open] {
+    animation: sheet-in 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @keyframes sheet-in {
+    from { transform: translateY(24px); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
 }
