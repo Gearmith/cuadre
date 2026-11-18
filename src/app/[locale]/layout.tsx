@@ -2,13 +2,13 @@ import type { Metadata, Viewport } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
-import { Lexend, Source_Sans_3 } from "next/font/google";
+import { Bricolage_Grotesque, Figtree } from "next/font/google";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
-const lexend = Lexend({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-lexend" });
-const sourceSans = Source_Sans_3({ subsets: ["latin"], weight: ["400", "600"], variable: "--font-source-sans" });
+const bricolage = Bricolage_Grotesque({ subsets: ["latin"], axes: ["wdth", "opsz"], variable: "--font-bricolage" });
+const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
 
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
@@ -23,8 +23,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f2f4f3" },
-    { media: "(prefers-color-scheme: dark)", color: "#121a22" },
+    { media: "(prefers-color-scheme: light)", color: "#e9efe6" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a2622" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -41,7 +41,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} className={`${lexend.variable} ${sourceSans.variable} antialiased`} suppressHydrationWarning>
+    <html lang={locale} className={`${bricolage.variable} ${figtree.variable} antialiased`} suppressHydrationWarning>
       <body className="min-h-dvh">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <NextIntlClientProvider>{children}</NextIntlClientProvider>

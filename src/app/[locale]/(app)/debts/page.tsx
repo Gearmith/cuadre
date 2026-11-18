@@ -44,7 +44,7 @@ export default async function DebtsPage({ searchParams }: PageProps<"/[locale]/d
   return (
     <div className="flex flex-col gap-6">
       <header className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="font-display text-2xl font-medium md:text-[1.75rem]">{t("debts.title")}</h1>
+        <h1 className="font-display text-3xl font-bold md:text-4xl">{t("debts.title")}</h1>
         <DebtSheetButton defaultDirection={direction} />
       </header>
 
@@ -63,7 +63,7 @@ export default async function DebtsPage({ searchParams }: PageProps<"/[locale]/d
               href={{ pathname: "/debts", query: tab.key === "i_owe" ? {} : { view: tab.key } }}
               aria-current={active ? "page" : undefined}
               className={`rounded-panel border px-4 py-3 transition-colors duration-150 ${
-                active ? "border-navy bg-surface ring-1 ring-navy" : "border-line bg-surface hover:bg-surface-2"
+                active ? "border-primary bg-surface ring-1 ring-gold" : "border-line bg-surface hover:bg-surface-2"
               }`}
             >
               <span className="block text-sm font-semibold text-ink-soft">{tab.label}</span>

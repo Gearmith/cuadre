@@ -33,14 +33,14 @@ export default async function DebtPage({ params }: PageProps<"/[locale]/debts/[i
 
   return (
     <div className="flex flex-col gap-6">
-      <Link href={iOwe ? "/debts" : { pathname: "/debts", query: { view: "owed_to_me" } }} className="-ml-2 inline-flex min-h-11 w-fit items-center gap-1.5 rounded-field px-2 font-semibold text-navy hover:bg-surface-2">
+      <Link href={iOwe ? "/debts" : { pathname: "/debts", query: { view: "owed_to_me" } }} className="-ml-2 inline-flex min-h-11 w-fit items-center gap-1.5 rounded-field px-2 font-semibold text-gold hover:bg-surface-2">
         <ArrowLeft size={18} strokeWidth={1.75} aria-hidden />
         {t("debts.back")}
       </Link>
 
       <section className="rounded-panel border border-line bg-surface p-5 md:p-7">
         <p className="text-sm font-semibold text-ink-soft">{t(iOwe ? "debts.iOwe" : "debts.owedToMe")}</p>
-        <h1 className="mt-0.5 font-display text-2xl font-medium break-words">{debt.person}</h1>
+        <h1 className="mt-0.5 font-display text-3xl font-bold break-words">{debt.person}</h1>
         {debt.description ? <p className="mt-1 text-ink-soft">{debt.description}</p> : null}
 
         <div className="mt-6">
@@ -78,7 +78,7 @@ export default async function DebtPage({ params }: PageProps<"/[locale]/debts/[i
       </section>
 
       <section aria-labelledby="payments">
-        <h2 id="payments" className="mb-3 font-display text-lg font-medium">
+        <h2 id="payments" className="mb-3 font-display text-xl font-bold">
           {t("debts.payments")}
         </h2>
         {payments.length ? (

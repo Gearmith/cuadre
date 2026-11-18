@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeftRight, HandCoins, LayoutGrid, Settings } from "lucide-react";
+import { ArrowLeftRight, HandCoins, LayoutGrid, Settings, WalletCards } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { BrandMark } from "./brand";
@@ -8,6 +8,7 @@ import { BrandMark } from "./brand";
 const ITEMS = [
   { href: "/", key: "summary", icon: LayoutGrid },
   { href: "/transactions", key: "transactions", icon: ArrowLeftRight },
+  { href: "/accounts", key: "accounts", icon: WalletCards },
   { href: "/debts", key: "debts", icon: HandCoins },
   { href: "/settings", key: "settings", icon: Settings },
 ] as const;
@@ -36,7 +37,7 @@ export function SideNav() {
                   href={href}
                   aria-current={active ? "page" : undefined}
                   className={`flex min-h-11 items-center gap-3 rounded-field px-3 font-semibold transition-colors duration-150 ${
-                    active ? "bg-surface-2 text-navy" : "text-ink-soft hover:bg-surface-2 hover:text-ink"
+                    active ? "bg-primary text-on-primary" : "text-ink-soft hover:bg-surface-2 hover:text-ink"
                   }`}
                 >
                   <Icon size={20} strokeWidth={1.75} aria-hidden />
@@ -56,7 +57,7 @@ export function BottomNav() {
   const isActive = useIsActive();
   return (
     <nav aria-label={t("main")} className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-surface pb-safe md:hidden">
-      <ul className="grid grid-cols-4">
+      <ul className="grid grid-cols-5">
         {ITEMS.map(({ href, key, icon: Icon }) => {
           const active = isActive(href);
           return (
@@ -64,11 +65,13 @@ export function BottomNav() {
               <Link
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className={`flex min-h-16 flex-col items-center justify-center gap-1 text-xs font-semibold ${
-                  active ? "text-navy" : "text-ink-soft"
+                className={`flex min-h-16 flex-col items-center justify-center gap-1 text-[0.6875rem] font-semibold ${
+                  active ? "text-ink" : "text-ink-soft"
                 }`}
               >
-                <Icon size={22} strokeWidth={active ? 2.25 : 1.75} aria-hidden />
+                <span className={`flex h-7 w-12 items-center justify-center rounded-full transition-colors duration-150 ${active ? "bg-primary text-on-primary" : ""}`}>
+                  <Icon size={20} strokeWidth={active ? 2.25 : 1.75} aria-hidden />
+                </span>
                 {t(key)}
               </Link>
             </li>

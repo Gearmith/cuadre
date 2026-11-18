@@ -11,10 +11,11 @@
     "debts": "Debts",
     "settings": "Settings",
     "add": "Add transaction",
-    "skip": "Skip to content"
+    "skip": "Skip to content",
+    "accounts": "Accounts"
   },
   "auth": {
-    "tagline": "Your money, clear, from anywhere.",
+    "tagline": "Balance your money from anywhere.",
     "loginTitle": "Sign in",
     "loginLead": "Use your email and password.",
     "email": "Email",
@@ -62,7 +63,11 @@
     "seeAll": "See all",
     "debts": "Pending debts",
     "seeDebts": "See debts",
-    "passwordUpdated": "Password updated."
+    "passwordUpdated": "Password updated.",
+    "total": "You have in total",
+    "totalHint": "The sum of all your accounts and pockets. Credit cards subtract.",
+    "accounts": "Your accounts",
+    "manageAccounts": "See accounts"
   },
   "month": {
     "prev": "Previous month",
@@ -101,7 +106,20 @@
     "emptyHint": "Add the first one with the Add button.",
     "emptyFilter": "No {kind} in {month}.",
     "dayNet": "Day balance",
-    "editRow": "Edit {category} of {amount}"
+    "editRow": "Edit {category} of {amount}",
+    "transfer": "Move",
+    "addTransfer": "Move money",
+    "editTransfer": "Edit transfer",
+    "saveTransfer": "Save transfer",
+    "deleteTransfer": "Delete transfer",
+    "account": "Account",
+    "fromAccount": "From",
+    "toAccount": "To",
+    "transferRow": "{from} → {to}",
+    "editTransferRow": "Edit transfer of {amount} from {from} to {to}",
+    "transfers": "Transfers",
+    "needAccount": "Create an account first to log transactions.",
+    "goToAccounts": "Create account"
   },
   "categories": {
     "expense": {
@@ -208,7 +226,14 @@
     "retry": "Try again",
     "notFoundTitle": "This page doesn't exist",
     "notFoundBody": "The link may be mistyped.",
-    "goHome": "Go to summary"
+    "goHome": "Go to summary",
+    "account": "Pick an account.",
+    "sameAccount": "Pick a different account than the one it comes from.",
+    "accountName": "Enter a name for the account.",
+    "parent": "Pick which account this pocket belongs to.",
+    "initialBalance": "Enter a number, e.g. 250,000 or 0.",
+    "pickAccount": "Pick at least one account.",
+    "accountInUse": "This account has activity. Archive it to hide it without losing its history."
   },
   "toast": {
     "expenseSaved": "Expense saved",
@@ -222,7 +247,16 @@
     "debtDeleted": "Debt deleted",
     "paymentSaved": "Payment saved",
     "paymentDeleted": "Payment deleted",
-    "currencySaved": "Currency saved"
+    "currencySaved": "Currency saved",
+    "transferSaved": "Transfer saved",
+    "transferUpdated": "Transfer updated",
+    "transferDeleted": "Transfer deleted",
+    "accountSaved": "Account saved",
+    "accountUpdated": "Account updated",
+    "accountsCreated": "Accounts created",
+    "accountArchived": "Account archived",
+    "accountRestored": "Account visible again",
+    "accountDeleted": "Account deleted"
   },
   "setup": {
     "title": "The database isn't connected yet",
@@ -231,5 +265,65 @@
     "step2": "In the SQL Editor, paste and run the file supabase/schema.sql.",
     "step3": "Copy the project URL and the public key into .env.local (see .env.example).",
     "step4": "Restart the server with npm run dev."
+  },
+  "accounts": {
+    "title": "Accounts",
+    "add": "Add account",
+    "addPocket": "Add pocket",
+    "edit": "Edit account",
+    "editPocket": "Edit pocket",
+    "name": "Name",
+    "namePlaceholder": "E.g. Checking, Savings, Wallet…",
+    "pocketPlaceholder": "E.g. Rent, Trip, Emergency…",
+    "kind": "Type",
+    "kinds": {
+      "bank": "Account",
+      "cash": "Cash",
+      "credit": "Credit card",
+      "pocket": "Pocket"
+    },
+    "parent": "Inside which account?",
+    "color": "Note color",
+    "colors": {
+      "green": "Green",
+      "blue": "Blue",
+      "purple": "Purple",
+      "red": "Red",
+      "gold": "Gold",
+      "slate": "Slate"
+    },
+    "initial": "Current balance",
+    "initialHint": "What it has today, according to your bank app. You can change it later.",
+    "initialCredit": "What you owe today",
+    "initialCreditHint": "The card's used balance. It will show as negative.",
+    "save": "Save account",
+    "saving": "Saving…",
+    "balance": "Balance",
+    "pockets": "{count, plural, =0 {No pockets} one {# pocket} other {# pockets}}",
+    "inPockets": "In pockets",
+    "available": "Available",
+    "movements": "{month} activity",
+    "noMovements": "This account has no activity in {month}.",
+    "archive": "Archive account",
+    "restore": "Show again",
+    "archivedSection": "Archived ({count})",
+    "archivedNote": "Archived: hidden when logging transactions.",
+    "delete": "Delete account",
+    "confirmDelete": "The account and its pockets will be deleted. Only possible if they have no activity.",
+    "confirmArchive": "The account stops showing when logging transactions. Its history is kept.",
+    "back": "Back to accounts",
+    "notFound": "This account doesn't exist or was deleted.",
+    "emptyTitle": "Add your accounts to get started",
+    "emptyBody": "Pick the ones you use. Then set what each one has today.",
+    "starterBancolombia": "Bancolombia",
+    "starterNu": "Nu",
+    "starterCash": "Cash",
+    "starterCredit": "Credit card",
+    "createStarters": "Create accounts",
+    "creating": "Creating…",
+    "orCustom": "Another account? Add it your way.",
+    "setBalances": "Now set each account's balance: tap the account, then Edit account.",
+    "pocketsOf": "Pockets",
+    "noPockets": "Set money aside inside this account: rent, trip, savings…"
   }
 }

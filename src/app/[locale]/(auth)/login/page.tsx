@@ -15,11 +15,11 @@ export default async function LoginPage({ searchParams }: PageProps<"/[locale]/l
     <AuthShell
       path="/login"
       title={t("loginTitle")}
-      lead={t("tagline")}
+      lead={t("loginLead")}
       footer={
         <>
           {t("noAccount")}{" "}
-          <Link href="/signup" className="font-semibold text-navy hover:underline">
+          <Link href="/signup" className="font-semibold text-gold hover:underline">
             {t("createAccount")}
           </Link>
         </>

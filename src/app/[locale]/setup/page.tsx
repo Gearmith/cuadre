@@ -8,7 +8,7 @@ export default async function SetupPage() {
     <main className="mx-auto flex min-h-dvh max-w-lg flex-col justify-center gap-6 px-4 py-10">
       <BrandMark size={36} />
       <div>
-        <h1 className="font-display text-2xl font-medium">{t("title")}</h1>
+        <h1 className="font-display text-3xl font-bold">{t("title")}</h1>
         <p className="mt-2 text-ink-soft">{t("lead")}</p>
       </div>
       <ol className="flex flex-col gap-3 rounded-panel border border-line bg-surface p-5">

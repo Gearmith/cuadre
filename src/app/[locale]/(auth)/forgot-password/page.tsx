@@ -17,7 +17,7 @@ export default async function ForgotPage() {
       title={t("forgotTitle")}
       lead={t("forgotLead")}
       footer={
-        <Link href="/login" className="font-semibold text-navy hover:underline">
+        <Link href="/login" className="font-semibold text-gold hover:underline">
           {t("backToLogin")}
         </Link>
       }

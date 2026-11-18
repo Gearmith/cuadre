@@ -13,7 +13,7 @@ import { useToast } from "./toast";
 import { FormAlert, SubmitButton } from "./ui";
 
 const segment =
-  "flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-[5px] px-3 text-sm font-semibold transition-colors duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-navy";
+  "flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-[5px] px-3 text-sm font-semibold transition-colors duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-gold";
 
 const subscribe = () => () => {};
 

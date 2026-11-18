@@ -4,7 +4,7 @@ import { cache } from "react";
 import { DEFAULT_TZ, monthRange, todayIn } from "./dates";
 import { DEFAULT_CURRENCY, isCurrency, type Currency } from "./money";
 import { createClient, getUser } from "./supabase/server";
-import type { Debt, DebtPayment, Transaction } from "./types";
+import type { Account, Debt, DebtPayment, Entry, Transaction, Transfer } from "./types";
 
 export const getPrefs = cache(async (): Promise<{ currency: Currency; timeZone: string; today: string; email: string }> => {
   const [user, cookieStore] = await Promise.all([getUser(), cookies()]);
@@ -23,27 +23,90 @@ const toTx = (row: Record<string, unknown>): Transaction => ({
   amount: Number(row.amount),
 });
 
-export async function getMonthTransactions(month: string): Promise<Transaction[]> {
-  const supabase = await createClient();
-  const { start, end } = monthRange(month);
-  const { data, error } = await supabase
-    .from("transactions")
-    .select("id, type, amount, category, note, occurred_on, created_at")
-    .gte("occurred_on", start)
-    .lte("occurred_on", end)
-    .order("occurred_on", { ascending: false })
-    .order("created_at", { ascending: false });
-  if (error) throw new Error(error.message);
-  return (data ?? []).map(toTx);
-}
-
 export async function getTotals(): Promise<{ income: number; expense: number; balance: number }> {
   const supabase = await createClient();
-  const { data, error } = await supabase.rpc("balance_totals").single<{ income: number; expense: number }>();
+  const { data, error } = await supabase
+    .rpc("balance_totals")
+    .single<{ income: number; expense: number; initial: number }>();
   if (error) throw new Error(error.message);
   const income = Number(data?.income ?? 0);
   const expense = Number(data?.expense ?? 0);
-  return { income, expense, balance: income - expense };
+  const initial = Number(data?.initial ?? 0);
+  return { income, expense, balance: initial + income - expense };
+}
+
+/** Cuentas (incluye archivadas) con su saldo actual, deduplicado por petición. */
+export const getAccounts = cache(async (): Promise<Account[]> => {
+  const supabase = await createClient();
+  const [accRes, balRes] = await Promise.all([
+    supabase
+      .from("accounts")
+      .select("id, name, kind, parent_id, color, initial_balance, archived")
+      .order("created_at", { ascending: true }),
+    supabase.rpc("account_balances"),
+  ]);
+  if (accRes.error) throw new Error(accRes.error.message);
+  if (balRes.error) throw new Error(balRes.error.message);
+  const balances = new Map<string, number>(
+    ((balRes.data ?? []) as { account_id: string; balance: number }[]).map((b) => [b.account_id, Number(b.balance)]),
+  );
+  return (accRes.data ?? []).map((a) => ({
+    ...(a as Omit<Account, "balance">),
+    initial_balance: Number(a.initial_balance),
+    balance: balances.get(a.id) ?? Number(a.initial_balance),
+  }));
+});
+
+const toTransfer = (row: Record<string, unknown>): Transfer => ({
+  ...(row as Transfer),
+  amount: Number(row.amount),
+});
+
+function sortEntries(entries: Entry[]) {
+  return entries.sort((a, b) =>
+    a.occurred_on === b.occurred_on ? b.created_at.localeCompare(a.created_at) : b.occurred_on.localeCompare(a.occurred_on),
+  );
+}
+
+/** Gastos, ingresos y movimientos entre cuentas de un mes (opcionalmente de una cuenta). */
+export async function getMonthEntries(month: string, accountId?: string): Promise<Entry[]> {
+  const supabase = await createClient();
+  const { start, end } = monthRange(month);
+  let txQ = supabase
+    .from("transactions")
+    .select("id, type, account_id, amount, category, note, occurred_on, created_at")
+    .gte("occurred_on", start)
+    .lte("occurred_on", end);
+  let trQ = supabase
+    .from("transfers")
+    .select("id, from_account_id, to_account_id, amount, occurred_on, note, created_at")
+    .gte("occurred_on", start)
+    .lte("occurred_on", end);
+  if (accountId) {
+    txQ = txQ.eq("account_id", accountId);
+    trQ = trQ.or(`from_account_id.eq.${accountId},to_account_id.eq.${accountId}`);
+  }
+  const [txRes, trRes] = await Promise.all([txQ, trQ]);
+  if (txRes.error) throw new Error(txRes.error.message);
+  if (trRes.error) throw new Error(trRes.error.message);
+  return sortEntries([
+    ...(txRes.data ?? []).map((r) => ({ kind: "tx" as const, ...toTx(r) })),
+    ...(trRes.data ?? []).map((r) => ({ kind: "transfer" as const, ...toTransfer(r) })),
+  ]);
+}
+
+/** ¿La cuenta (o sus bolsillos) tiene movimientos? Decide si se puede eliminar o sólo archivar. */
+export async function accountHasEntries(ids: string[]): Promise<boolean> {
+  const supabase = await createClient();
+  const list = ids.join(",");
+  const [tx, tr] = await Promise.all([
+    supabase.from("transactions").select("id", { count: "exact", head: true }).in("account_id", ids),
+    supabase
+      .from("transfers")
+      .select("id", { count: "exact", head: true })
+      .or(`from_account_id.in.(${list}),to_account_id.in.(${list})`),
+  ]);
+  return (tx.count ?? 0) + (tr.count ?? 0) > 0;
 }
 
 type DebtRow = Omit<Debt, "paid" | "remaining"> & { debt_payments: { amount: number }[] };

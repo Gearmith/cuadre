@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { formatMonth, shiftMonth } from "@/lib/dates";
 
-type Props = { month: string; currentMonth: string; locale: string; basePath: "/" | "/transactions"; query?: Record<string, string> };
+type Props = { month: string; currentMonth: string; locale: string; basePath: string; query?: Record<string, string> };
 
 export async function MonthSwitcher({ month, currentMonth, locale, basePath, query = {} }: Props) {
   const t = await getTranslations("month");
@@ -19,7 +19,7 @@ export async function MonthSwitcher({ month, currentMonth, locale, basePath, que
       <Link href={href(prev)} className={arrow} aria-label={t("prev")}>
         <ChevronLeft size={22} strokeWidth={1.75} aria-hidden />
       </Link>
-      <span className="min-w-36 text-center font-display text-lg font-medium" aria-current="date">
+      <span className="min-w-36 text-center font-display text-xl font-bold" aria-current="date">
         {formatMonth(month, locale)}
       </span>
       {canGoNext ? (

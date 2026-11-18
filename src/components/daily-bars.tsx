@@ -43,7 +43,7 @@ export async function DailyBars({ month, transactions, locale, currency, today }
                 <span className="flex flex-1 items-end">
                   {value > 0 ? <span className="w-full rounded-t-[2px] bg-income" style={{ height: `${pct}%` }} /> : null}
                 </span>
-                <span className={`h-px w-full ${isToday ? "bg-ink" : "bg-line"}`} />
+                <span className={`w-full ${isToday ? "h-0.5 bg-gold" : "h-px bg-line"}`} />
                 <span className="flex flex-1 items-start">
                   {value < 0 ? <span className="w-full rounded-b-[2px] bg-expense" style={{ height: `${pct}%` }} /> : null}
                 </span>

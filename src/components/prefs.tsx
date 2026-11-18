@@ -2,8 +2,11 @@
 
 import { createContext, use, type ReactNode } from "react";
 import { formatMoney } from "@/lib/money";
+import type { Account } from "@/lib/types";
 
-type Prefs = { locale: string; currency: string; today: string };
+export type AccountLite = Pick<Account, "id" | "name" | "kind" | "parent_id" | "color" | "archived">;
+
+type Prefs = { locale: string; currency: string; today: string; accounts: AccountLite[] };
 
 const PrefsContext = createContext<Prefs | null>(null);
 

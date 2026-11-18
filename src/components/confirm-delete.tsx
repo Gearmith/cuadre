@@ -15,6 +15,7 @@ export function ConfirmDelete({
   question,
   onDone,
   triggerClassName = `${buttonStyles.dangerQuiet} w-full`,
+  confirmLabel,
 }: {
   action: (prev: ActionState, form: FormData) => Promise<ActionState>;
   fields: Record<string, string>;
@@ -23,6 +24,8 @@ export function ConfirmDelete({
   onDone?: () => void;
   /** Estilo del botón inicial (por defecto: botón ancho en rojo suave). */
   triggerClassName?: string;
+  /** Texto del botón de confirmar (por defecto "Sí, eliminar"). */
+  confirmLabel?: string;
 }) {
   const t = useTranslations();
   const toast = useToast();
@@ -55,8 +58,8 @@ export function ConfirmDelete({
         <button type="button" className={`${buttonStyles.secondary} flex-1`} onClick={() => setAsking(false)}>
           {t("tx.cancel")}
         </button>
-        <SubmitButton variant="danger" pendingLabel="…" className="flex-1">
-          {t("tx.confirm")}
+        <SubmitButton variant={confirmLabel ? "primary" : "danger"} pendingLabel="…" className="flex-1">
+          {confirmLabel ?? t("tx.confirm")}
         </SubmitButton>
       </div>
     </form>

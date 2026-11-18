@@ -31,7 +31,7 @@ export function LoginForm({ linkError }: { linkError: boolean }) {
         {(p) => <PasswordInput {...p} name="password" autoComplete="current-password" />}
       </Field>
       <div className="-mt-2 flex justify-end">
-        <Link href="/forgot-password" className="rounded-field py-1 text-sm font-semibold text-navy hover:underline">
+        <Link href="/forgot-password" className="rounded-field py-1 text-sm font-semibold text-gold hover:underline">
           {t("auth.forgot")}
         </Link>
       </div>

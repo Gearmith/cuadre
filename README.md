@@ -2,6 +2,7 @@
 
 App web para registrar gastos, ingresos y deudas desde cualquier dispositivo con la misma cuenta.
 Next.js 16 + Supabase (base de datos y login) + next-intl (español / inglés) + modo claro y oscuro.
+Cuentas (banco, efectivo, tarjeta de crédito) con bolsillos o cajitas, y movimientos entre cuentas.
 
 El diseño está documentado en [`DESIGN.md`](./DESIGN.md).
 
@@ -10,7 +11,8 @@ El diseño está documentado en [`DESIGN.md`](./DESIGN.md).
 ## 1. Crear la base de datos (gratis, 5 minutos)
 
 1. Entra en <https://supabase.com>, crea una cuenta y un **New project** (plan Free). Elige la región más cercana a ti y guarda la contraseña de la base de datos.
-2. En el menú izquierdo abre **SQL Editor → New query**, pega todo el contenido de [`supabase/schema.sql`](./supabase/schema.sql) y pulsa **Run**.
+2. En el menú izquierdo abre **SQL Editor → New query**, pega todo el contenido de [`supabase/schema.sql`](./supabase/schema.sql) y pulsa **Run**. Después, en otra consulta nueva, haz lo mismo con [`supabase/migrations/002_accounts.sql`](./supabase/migrations/002_accounts.sql) (cuentas, bolsillos y movimientos entre cuentas).
+   - Consejo: copia el archivo desde el editor de código o con `pbcopy < archivo.sql`, no desde un chat: algunos chats recortan texto al copiar.
 3. En **Project Settings → API Keys** copia la **Publishable key** (`sb_publishable_…`). En **Project Settings → Data API** copia la **Project URL**.
 4. En **Authentication → Sign In / Providers → Email**:
    - Deja activado *Email*.

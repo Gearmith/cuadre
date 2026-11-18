@@ -56,3 +56,14 @@ export function amountToInput(value: number, locale: string) {
   const fixed = Number.isInteger(value) ? String(value) : value.toFixed(2);
   return fixed.replace(".", decimalSeparator(locale));
 }
+
+/** Como parseAmount, pero acepta negativos y cero (saldo inicial de una tarjeta, por ejemplo). */
+export function parseSignedAmount(raw: string, locale: string): number | null {
+  const trimmed = raw.trim();
+  const negative = /^[-−]/.test(trimmed);
+  const digits = trimmed.replace(/^[-−]\s*/, "");
+  if (/^0+([.,]0+)?$/.test(digits.replace(/[^\d.,]/g, ""))) return 0;
+  const n = parseAmount(digits, locale);
+  if (n === null) return null;
+  return negative ? -n : n;
+}

@@ -2,46 +2,58 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ── Tokens: ver DESIGN.md ─────────────────────────────── */
+/* Tokens "Billete": ver DESIGN.md */
 :root {
-  --bg: #f2f4f3;
-  --surface: #ffffff;
-  --surface-2: #e7ecea;
-  --line: #d3dad7;
-  --ink: #17212b;
-  --ink-soft: #55616d;
-  --navy: #1d3557;
-  --navy-hover: #26436b;
-  --on-navy: #ffffff;
-  --income: #2f7d5b;
-  --expense: #b4472e;
-  --warn: #8a6510;
-  --danger: #a8321f;
-  --income-tint: #eef6f1;
-  --expense-tint: #f6e4df;
-  --shadow-float: 0 12px 32px -8px rgb(23 33 43 / 0.22), 0 2px 6px rgb(23 33 43 / 0.08);
+  --bg: #e9efe6;
+  --surface: #f7faf4;
+  --surface-2: #dce6d9;
+  --line: #bfcfbf;
+  --ink: #0e2b26;
+  --ink-soft: #4a5f58;
+  --primary: #0f3d36;
+  --primary-hover: #17524a;
+  --on-primary: #f1ead6;
+  --gold: #8a5a0b;
+  --income: #1b6e45;
+  --expense: #b0412a;
+  --warn: #8a5a0b;
+  --danger: #a3301c;
+  --income-tint: #d6eadb;
+  --expense-tint: #f5dfd7;
+  --shadow-float: 0 14px 34px -10px rgb(10 38 34 / 0.35), 0 2px 6px rgb(10 38 34 / 0.12);
+  --shadow-note: 0 18px 30px -18px rgb(10 38 34 / 0.55), 0 2px 4px rgb(10 38 34 / 0.18);
   color-scheme: light;
 }
 
 .dark {
-  --bg: #121a22;
-  --surface: #1a242f;
-  --surface-2: #222e3a;
-  --line: #2e3b48;
-  --ink: #e4eaef;
-  --ink-soft: #9aa7b3;
-  --navy: #8db2dd;
-  --navy-hover: #a5c3e6;
-  --on-navy: #0f1822;
-  --income: #62be92;
-  --expense: #e8896f;
-  --warn: #e0b455;
-  --danger: #f0927c;
-  --income-tint: #1d3a2f;
-  --expense-tint: #3d2620;
-  --shadow-float: 0 16px 40px -8px rgb(0 0 0 / 0.55), 0 2px 6px rgb(0 0 0 / 0.3);
+  --bg: #0a2622;
+  --surface: #0f332d;
+  --surface-2: #164139;
+  --line: #265248;
+  --ink: #f1ead6;
+  --ink-soft: #afc0b4;
+  --primary: #e7a93b;
+  --primary-hover: #f0bb5a;
+  --on-primary: #1b1404;
+  --gold: #e7a93b;
+  --income: #7fd6a4;
+  --expense: #ff8f72;
+  --warn: #ffc861;
+  --danger: #ff9a80;
+  --income-tint: #15402f;
+  --expense-tint: #4a2620;
+  --shadow-float: 0 18px 40px -10px rgb(0 0 0 / 0.6), 0 2px 6px rgb(0 0 0 / 0.35);
+  --shadow-note: 0 22px 36px -18px rgb(0 0 0 / 0.75), 0 2px 4px rgb(0 0 0 / 0.4);
   color-scheme: dark;
 }
+
+/* Billetes: siempre iguales en claro y oscuro */
+.note-green  { --note-bg: #0f3d36; --note-ink: #f1ead6; --note-accent: #e7a93b; }
+.note-blue   { --note-bg: #16395c; --note-ink: #eaf0f7; --note-accent: #8fc1e3; }
+.note-purple { --note-bg: #3d2a62; --note-ink: #efe7fb; --note-accent: #c4a8f5; }
+.note-red    { --note-bg: #6a2422; --note-ink: #f8e7e0; --note-accent: #f0a27e; }
+.note-gold   { --note-bg: #5c430f; --note-ink: #fbf0d6; --note-accent: #f2c95c; }
+.note-slate  { --note-bg: #2b3441; --note-ink: #e8ecf1; --note-accent: #9fb3c8; }
 
 @theme inline {
   --color-bg: var(--bg);
@@ -50,20 +62,26 @@
   --color-line: var(--line);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
-  --color-navy: var(--navy);
-  --color-navy-hover: var(--navy-hover);
-  --color-on-navy: var(--on-navy);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-gold: var(--gold);
   --color-income: var(--income);
   --color-expense: var(--expense);
   --color-warn: var(--warn);
   --color-danger: var(--danger);
   --color-income-tint: var(--income-tint);
   --color-expense-tint: var(--expense-tint);
-  --font-display: var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
-  --radius-field: 6px;
-  --radius-panel: 10px;
+  --color-note-bg: var(--note-bg);
+  --color-note-ink: var(--note-ink);
+  --color-note-accent: var(--note-accent);
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --radius-field: 8px;
+  --radius-panel: 14px;
+  --radius-note: 18px;
   --shadow-float: var(--shadow-float);
+  --shadow-note: var(--shadow-note);
 }
 
 html {
@@ -86,14 +104,18 @@ body {
   line-height: 1.5;
 }
 
-.num {
+/* Tipografía de billete: condensada y con números tabulares */
+.font-display, .num {
   font-family: var(--font-display);
+  font-variation-settings: "wdth" 78, "opsz" 48;
+}
+.num {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
 }
 
 :focus-visible {
-  outline: 2px solid var(--navy);
+  outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
 
@@ -103,7 +125,7 @@ dialog.sheet {
   width: 100%;
   max-width: 100%;
   max-height: 92dvh;
-  border-radius: 14px 14px 0 0;
+  border-radius: 18px 18px 0 0;
   background: var(--surface);
   color: var(--ink);
   box-shadow: var(--shadow-float);
@@ -112,12 +134,12 @@ dialog.sheet {
   overscroll-behavior: contain;
 }
 dialog.sheet::backdrop {
-  background: rgb(10 16 22 / 0.5);
+  background: rgb(6 24 21 / 0.6);
 }
 @media (min-width: 640px) {
   dialog.sheet {
     margin: auto;
-    max-width: 30rem;
+    max-width: 32rem;
     border-radius: var(--radius-panel);
   }
 }

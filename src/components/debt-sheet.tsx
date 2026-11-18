@@ -70,7 +70,7 @@ function DebtForm({ debt, defaultDirection, onDone }: { debt?: Debt; defaultDire
           {(["i_owe", "owed_to_me"] as const).map((k) => (
             <label
               key={k}
-              className={`flex min-h-10 cursor-pointer items-center justify-center rounded-[5px] text-base font-semibold transition-colors duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-navy ${
+              className={`flex min-h-10 cursor-pointer items-center justify-center rounded-[5px] text-base font-semibold transition-colors duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-gold ${
                 direction === k ? `bg-surface shadow-sm ${k === "i_owe" ? "text-expense" : "text-income"}` : "text-ink-soft hover:text-ink"
               }`}
             >
@@ -96,7 +96,7 @@ function DebtForm({ debt, defaultDirection, onDone }: { debt?: Debt; defaultDire
             autoComplete="off"
             defaultValue={debt ? amountToInput(debt.amount, locale) : ""}
             placeholder="0"
-            className={`${inputClass} num min-h-14 text-3xl font-medium`}
+            className={`${inputClass} num min-h-14 text-3xl! font-bold`}
           />
         )}
       </Field>
@@ -166,7 +166,7 @@ function PaymentForm({ debtId, suggested, locale, today, onDone }: { debtId: str
             autoComplete="off"
             autoFocus
             placeholder={suggested > 0 ? amountToInput(suggested, locale) : "0"}
-            className={`${inputClass} num min-h-14 text-3xl font-medium`}
+            className={`${inputClass} num min-h-14 text-3xl! font-bold`}
           />
         )}
       </Field>

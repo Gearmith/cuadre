@@ -40,7 +40,7 @@ export function Sheet({
       {open ? (
         <div className="flex max-h-[92dvh] flex-col">
           <header className="flex items-center justify-between gap-3 border-b border-line px-5 py-3">
-            <h2 id={titleId} className="font-display text-lg font-medium">
+            <h2 id={titleId} className="font-display text-xl font-bold">
               {title}
             </h2>
             <button

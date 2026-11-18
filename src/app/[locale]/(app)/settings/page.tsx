@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="grid gap-3 border-b border-line py-6 last:border-0 md:grid-cols-[12rem_1fr] md:gap-8">
-      <h2 className="font-display text-base font-medium md:pt-2.5">{title}</h2>
+      <h2 className="font-display text-lg font-bold md:pt-2.5">{title}</h2>
       <div className="min-w-0">{children}</div>
     </section>
   );
@@ -25,7 +25,7 @@ export default async function SettingsPage() {
   const [locale, prefs, t] = await Promise.all([getLocale(), getPrefs(), getTranslations("settings")]);
   return (
     <div className="flex flex-col">
-      <h1 className="font-display text-2xl font-medium md:text-[1.75rem]">{t("title")}</h1>
+      <h1 className="font-display text-3xl font-bold md:text-4xl">{t("title")}</h1>
       <div className="mt-5 rounded-panel border border-line bg-surface px-5 md:px-7">
         <Section title={t("currency")}>
           <CurrencyForm current={prefs.currency} />

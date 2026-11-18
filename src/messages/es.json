@@ -11,10 +11,11 @@
     "debts": "Deudas",
     "settings": "Ajustes",
     "add": "Agregar movimiento",
-    "skip": "Saltar al contenido"
+    "skip": "Saltar al contenido",
+    "accounts": "Cuentas"
   },
   "auth": {
-    "tagline": "Tus cuentas claras, desde cualquier lugar.",
+    "tagline": "Cuadra tus cuentas desde cualquier lugar.",
     "loginTitle": "Entrar",
     "loginLead": "Usa tu correo y contraseña.",
     "email": "Correo",
@@ -62,7 +63,11 @@
     "seeAll": "Ver todos",
     "debts": "Deudas pendientes",
     "seeDebts": "Ver deudas",
-    "passwordUpdated": "Contraseña actualizada."
+    "passwordUpdated": "Contraseña actualizada.",
+    "total": "Tienes en total",
+    "totalHint": "La suma de todas tus cuentas, bolsillos y cajitas. Las tarjetas de crédito restan.",
+    "accounts": "Tus cuentas",
+    "manageAccounts": "Ver cuentas"
   },
   "month": {
     "prev": "Mes anterior",
@@ -101,7 +106,20 @@
     "emptyHint": "Agrega el primero con el botón Agregar.",
     "emptyFilter": "No hay {kind} en {month}.",
     "dayNet": "Balance del día",
-    "editRow": "Editar {category} de {amount}"
+    "editRow": "Editar {category} de {amount}",
+    "transfer": "Mover",
+    "addTransfer": "Mover plata",
+    "editTransfer": "Editar movimiento entre cuentas",
+    "saveTransfer": "Guardar movimiento",
+    "deleteTransfer": "Eliminar movimiento",
+    "account": "Cuenta",
+    "fromAccount": "Sale de",
+    "toAccount": "Entra a",
+    "transferRow": "{from} → {to}",
+    "editTransferRow": "Editar movimiento de {amount} de {from} a {to}",
+    "transfers": "Entre cuentas",
+    "needAccount": "Primero crea una cuenta para poder registrar movimientos.",
+    "goToAccounts": "Crear cuenta"
   },
   "categories": {
     "expense": {
@@ -208,7 +226,14 @@
     "retry": "Reintentar",
     "notFoundTitle": "Esta página no existe",
     "notFoundBody": "Puede que el enlace esté mal escrito.",
-    "goHome": "Ir al resumen"
+    "goHome": "Ir al resumen",
+    "account": "Elige una cuenta.",
+    "sameAccount": "Elige una cuenta distinta a la de salida.",
+    "accountName": "Escribe un nombre para la cuenta.",
+    "parent": "Elige en qué cuenta va este bolsillo.",
+    "initialBalance": "Escribe un número, por ejemplo 250.000 o 0.",
+    "pickAccount": "Elige al menos una cuenta.",
+    "accountInUse": "Esta cuenta tiene movimientos. Archívala para ocultarla sin perder el historial."
   },
   "toast": {
     "expenseSaved": "Gasto guardado",
@@ -222,7 +247,16 @@
     "debtDeleted": "Deuda eliminada",
     "paymentSaved": "Abono guardado",
     "paymentDeleted": "Abono eliminado",
-    "currencySaved": "Moneda guardada"
+    "currencySaved": "Moneda guardada",
+    "transferSaved": "Movimiento guardado",
+    "transferUpdated": "Movimiento actualizado",
+    "transferDeleted": "Movimiento eliminado",
+    "accountSaved": "Cuenta guardada",
+    "accountUpdated": "Cuenta actualizada",
+    "accountsCreated": "Cuentas creadas",
+    "accountArchived": "Cuenta archivada",
+    "accountRestored": "Cuenta visible otra vez",
+    "accountDeleted": "Cuenta eliminada"
   },
   "setup": {
     "title": "Falta conectar la base de datos",
@@ -231,5 +265,65 @@
     "step2": "En SQL Editor, pega y ejecuta el archivo supabase/schema.sql.",
     "step3": "Copia la URL del proyecto y la clave pública en el archivo .env.local (mira .env.example).",
     "step4": "Reinicia el servidor con npm run dev."
+  },
+  "accounts": {
+    "title": "Cuentas",
+    "add": "Agregar cuenta",
+    "addPocket": "Agregar bolsillo o cajita",
+    "edit": "Editar cuenta",
+    "editPocket": "Editar bolsillo",
+    "name": "Nombre",
+    "namePlaceholder": "Ej: Bancolombia, Nu, Billetera…",
+    "pocketPlaceholder": "Ej: Arriendo, Viaje, Emergencias…",
+    "kind": "Tipo",
+    "kinds": {
+      "bank": "Cuenta",
+      "cash": "Efectivo",
+      "credit": "Tarjeta de crédito",
+      "pocket": "Bolsillo o cajita"
+    },
+    "parent": "¿Dentro de qué cuenta?",
+    "color": "Color del billete",
+    "colors": {
+      "green": "Verde",
+      "blue": "Azul",
+      "purple": "Morado",
+      "red": "Rojo",
+      "gold": "Dorado",
+      "slate": "Pizarra"
+    },
+    "initial": "Saldo actual",
+    "initialHint": "Lo que tiene hoy, según la app de tu banco. Puedes cambiarlo después.",
+    "initialCredit": "Lo que debes hoy",
+    "initialCreditHint": "El saldo usado de la tarjeta. Se mostrará en negativo.",
+    "save": "Guardar cuenta",
+    "saving": "Guardando…",
+    "balance": "Saldo",
+    "pockets": "{count, plural, =0 {Sin bolsillos} one {# bolsillo} other {# bolsillos}}",
+    "inPockets": "En bolsillos",
+    "available": "Disponible",
+    "movements": "Movimientos de {month}",
+    "noMovements": "Esta cuenta no tiene movimientos en {month}.",
+    "archive": "Archivar cuenta",
+    "restore": "Volver a mostrar",
+    "archivedSection": "Archivadas ({count})",
+    "archivedNote": "Archivada: no aparece al registrar movimientos.",
+    "delete": "Eliminar cuenta",
+    "confirmDelete": "Se eliminará la cuenta y sus bolsillos. Sólo se puede si no tienen movimientos.",
+    "confirmArchive": "La cuenta deja de aparecer al registrar movimientos. Su historial se conserva.",
+    "back": "Volver a cuentas",
+    "notFound": "Esta cuenta no existe o fue eliminada.",
+    "emptyTitle": "Agrega tus cuentas para empezar",
+    "emptyBody": "Elige las que usas. Después le pones a cada una lo que tiene hoy.",
+    "starterBancolombia": "Bancolombia",
+    "starterNu": "Nu",
+    "starterCash": "Efectivo",
+    "starterCredit": "Tarjeta de crédito",
+    "createStarters": "Crear cuentas",
+    "creating": "Creando…",
+    "orCustom": "¿Otra cuenta? Agrégala a tu manera.",
+    "setBalances": "Ahora pon el saldo de cada cuenta: toca la cuenta y luego Editar cuenta.",
+    "pocketsOf": "Bolsillos y cajitas",
+    "noPockets": "Separa plata dentro de esta cuenta: arriendo, viaje, ahorro…"
   }
 }
